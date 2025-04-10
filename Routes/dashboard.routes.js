@@ -1,8 +1,8 @@
 const express = require('express');
-const { displayDashboard, handlePost, } = require('../Controllers/dashboard.controller');
+const { displayDashboard} = require('../Controllers/dashboard.controller');
 const { verifyUser } = require('../middlewares/authentication');
 const router = express.Router()
-const upload = require("../middlewares/upload")
+const upload = require("../cloudinary")
 
 router.get("/", displayDashboard)
 router.post("/post", verifyUser, upload.single("file"), async (req, res) => {
