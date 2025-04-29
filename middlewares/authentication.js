@@ -17,18 +17,6 @@ const verifyUser = async (req, res, next) => {
     } catch (error) {
         return res.status(401).json({ success: false, message: "Invalid or expired token" });
     }
-
-    // try {
-	// 	const token = await req.headers["authorization"]
-	// 	const user = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
-	// 	req.user = user;
-	// 	next();
-	// } catch (error) {
-	// 	res.json({
-	// 		success: false,
-	// 		message: "Ogbeni, wetin do your token. E no valid o"
-	// 	})
-	// }
 };
 
 module.exports = { verifyUser };

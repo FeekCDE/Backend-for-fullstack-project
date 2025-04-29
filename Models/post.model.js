@@ -29,6 +29,10 @@ const postSchema = new Schema({
       message: 'Invalid media URL format'
     }
   },
+  path:{
+    type: String,
+    required: true
+  },
   mediaType: {
     type: String,
     required: true,
@@ -39,9 +43,9 @@ const postSchema = new Schema({
     }
   },
   likes: {
-    type: [Schema.Types.ObjectId], // Array of user IDs who liked the post
-    ref: 'User',
-    default: []
+    type: [{
+      userId:{type: Schema.Types.ObjectId, ref: 'User' }
+    }]
   },
   comments: {
     type: [{

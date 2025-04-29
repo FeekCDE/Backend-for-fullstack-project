@@ -39,14 +39,14 @@ const handlePostCreation = async (req, res) => {
           userId: user._id,
           username: user.username,
           caption: req.body.caption.trim(),
+          path: `${req.file.path}`,
           mediaUrl: `/uploads/${req.file.filename}`,
           mediaType: req.file.mimetype.startsWith('image/') ? 'image' : 'video',
           createdAt: new Date(),
           updatedAt: new Date()
         };
     
-        
-        // Log success (consider using a proper logger in production)
+      
         console.log('New post created:', {
             postId: newPost._id,
             userId: newPost.userId,

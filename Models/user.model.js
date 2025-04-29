@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: "", // or a placeholder image
+        default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     },      
     password:{
         type: String,
@@ -36,9 +36,10 @@ const userSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    isAdmmin:{
+    isAdmin:{
         type:Boolean
     }
+    
 })
 
 userSchema.pre("save", async function () {
@@ -50,6 +51,17 @@ userSchema.pre("save", async function () {
 		console.log(error);
 	}
 })
+
+userSchema.add({
+    followers: [{ 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User' 
+    }],
+    following: [{ 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User' 
+    }]
+  });
 
 const User = mongoose.model("User", userSchema);
 module.exports = {User}
