@@ -38,19 +38,31 @@ const userSchema = mongoose.Schema({
     },
     isAdmin:{
         type:Boolean
-    }
+    },
+    resetPasswordToken: String,
+
+    resetPasswordExpires: Date
     
 })
 
-userSchema.pre("save", async function () {
-	const {password} = this;
-	try {
-		const salt = await bcrypt.genSalt();
-		this.password = await bcrypt.hash(password, salt);
-	} catch (error) {
-		console.log(error);
-	}
-})
+userSchema.pre('save', async function(next) {
+    try {
+      // Only hash the password if it has been modified (or is new)
+      if (!this.isModified('password')) return next();
+  
+      // Generate a salt
+      const salt = await bcrypt.genSalt(10);
+      
+      // Hash the password with the salt
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      
+      // Replace the plain text password with the hashed one
+      this.password = hashedPassword;
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });
 
 userSchema.add({
     followers: [{ 
