@@ -21,7 +21,7 @@ connectDB();
 require('./cloudinary'); 
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173"], // Match your frontend URL
+  origin: [process.env.FRONTEND_URL],
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));
