@@ -6,7 +6,7 @@ const {User} = require('../Models/user.model')
 const initializeSocket = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173", // Must match your frontend URL
+      origin: "https://photogram-ebon.vercel.app", // Must match your frontend URL
       methods: ["GET", "POST"],
       credentials: true
     }
