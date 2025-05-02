@@ -8,7 +8,7 @@ const { getDashboardPosts } = require("../Controllers/dashboard.controller");
 const Post = require('../Models/post.model');
 const {User} = require('../Models/user.model');
 
-router.get('/', verifyUser, getDashboardPosts);
+router.get('/', getDashboardPosts);
 router.post('/createpost', verifyUser, upload.single('media'), handlePostCreation);
 
 // Like route
