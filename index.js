@@ -21,7 +21,7 @@ connectDB();
 require('./cloudinary'); 
 app.use(express.json());
 app.use(cors({
-  origin: [`${process.env.FRONTEND_URL}`],
+  origin: ["https://photogram-ebon.vercel.app/"],
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));
